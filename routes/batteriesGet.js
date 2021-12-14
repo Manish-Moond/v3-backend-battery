@@ -16,7 +16,6 @@ const createError = require("http-errors");
 const { NotExtended } = require("http-errors");
 
 router.get("/:vehicleType", (req, res, next) => {
-  console.log(req.params.vehicleType);
   if (req.params.vehicleType == "bus") {
     vehicle = bus;
   } else if (req.params.vehicleType == "truck") {
@@ -38,13 +37,10 @@ router.get("/:vehicleType", (req, res, next) => {
   } else if (req.params.vehicleType == "inverter") {
     vehicle = inverter;
   }
+  const skip =
+    req.query.skip && /^\d+$/.test(req.query.skip) ? Number(req.query.skip) : 0;
   vehicle
-    .find({
-      $and: [
-        { number: { $gte: Number(req.query.start) } },
-        { number: { $lte: Number(req.query.end) } },
-      ],
-    })
+    .find({}, undefined, { skip, limit: 8 })
     .then((data) => {
       if (!data) {
         throw createError(404, "Not Found");

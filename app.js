@@ -17,7 +17,7 @@ const getBatteryRoute = require("./routes/batteryGet");
 const getBattriesRoute = require("./routes/batteriesGet");
 const postBatteryRoute = require("./routes/batteryPost");
 
-// usinf routes
+// using routes
 app.use("/detials", getBatteryRoute);
 app.use("/products", getBattriesRoute);
 app.use("/uploads", postBatteryRoute);
