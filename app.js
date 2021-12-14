@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const createError = require("http-errors");
 
@@ -14,8 +13,11 @@ app.use(cors());
 require("./initDB")();
 
 // Import Routes
-const getProducts = require("./routes/products");
-app.use("/products", getProducts);
+const getBatteryRoute = require("./routes/batteryGet");
+const postBatteryRoute = require("./routes/batteryPost");
+
+app.use("/detials", getBatteryRoute);
+app.use("/uploads", postBatteryRoute);
 
 //base url
 app.get("/", (req, res) => {

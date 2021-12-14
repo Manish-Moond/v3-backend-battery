@@ -11,6 +11,7 @@ const batterySchema = mongoose.Schema({
   warrenty: String,
   price: String,
   number: Number,
+  off: Number
 });
 exports.bus = mongoose.model("bus", batterySchema);
 exports.truck = mongoose.model("truck", batterySchema);
