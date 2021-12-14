@@ -14,9 +14,12 @@ require("./initDB")();
 
 // Import Routes
 const getBatteryRoute = require("./routes/batteryGet");
+const getBattriesRoute = require("./routes/batteriesGet");
 const postBatteryRoute = require("./routes/batteryPost");
 
+// usinf routes
 app.use("/detials", getBatteryRoute);
+app.use("/products", getBattriesRoute);
 app.use("/uploads", postBatteryRoute);
 
 //base url
