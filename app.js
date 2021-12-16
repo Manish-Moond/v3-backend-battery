@@ -16,11 +16,13 @@ require("./initDB")();
 const getBatteryRoute = require("./routes/batteryGet");
 const getBattriesRoute = require("./routes/batteriesGet");
 const postBatteryRoute = require("./routes/batteryPost");
+const updateBatteryRoute = require("./routes/batteryUpdate");
 
 // using routes
 app.use("/detials", getBatteryRoute);
 app.use("/products", getBattriesRoute);
 app.use("/uploads", postBatteryRoute);
+app.use("/update", updateBatteryRoute);
 
 //base url
 app.get("/", (req, res) => {

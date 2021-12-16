@@ -13,7 +13,6 @@ const {
   inverter,
 } = require("../models/batterySchema");
 const createError = require("http-errors");
-const { NotExtended } = require("http-errors");
 
 router.get("/:vehicleType", (req, res, next) => {
   if (req.params.vehicleType == "bus") {

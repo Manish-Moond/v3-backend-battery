@@ -17,7 +17,7 @@ const createError = require("http-errors");
 const { NotExtended } = require("http-errors");
 
 router.get("/:batteryByModel", (req, res, next) => {
-  console.log(req.params.batteryByModel);
+  
   if (req.params.batteryByModel == "bus") {
     vehicle = bus;
   } else if (req.params.batteryByModel == "truck") {
@@ -39,7 +39,8 @@ router.get("/:batteryByModel", (req, res, next) => {
   } else if (req.params.batteryByModel == "inverter") {
     vehicle = inverter;
   }
-  console.log(req.query.model);
+
+  //Geting data from database and sanding to client
   vehicle
     .find({ model: req.query.model })
     .then((data) => {

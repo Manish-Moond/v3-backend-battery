@@ -29,7 +29,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post("/:vehicleType", upload.single("image"), (req, res) => {
-  console.log("Manish sdfsdf");
+  
   if (req.params.vehicleType == "bus") {
     vehicle = bus;
   } else if (req.params.vehicleType == "truck") {
@@ -51,12 +51,12 @@ router.post("/:vehicleType", upload.single("image"), (req, res) => {
   } else if (req.params.vehicleType == "inverter") {
     vehicle = inverter;
   }
-  console.log(__dirname.substring(0, __dirname.length - 6));
 
+  // save data in database
   let obj = new vehicle({
-    company: req.body.company,
+    company: req.body.brandName,
     name: req.body.name,
-    model: req.body.model,
+    model: req.body.modelNumber,
     image: {
       data: Buffer.from(
         fs.readFileSync(
@@ -72,17 +72,10 @@ router.post("/:vehicleType", upload.single("image"), (req, res) => {
     },
     warrenty: req.body.warrenty,
     price: req.body.price,
-    numner: req.body.number,
   });
-  console.log(obj);
   obj.save();
-  console.log(
-    path.join(
-      __dirname.substring(0, __dirname.length - 6) +
-        "//uploads/" +
-        req.file.originalname
-    )
-  );
+
+  //deleting the file from upload folder
   fs.unlink(
     __dirname.substring(0, __dirname.length - 6) +
       "//uploads/" +
@@ -91,17 +84,18 @@ router.post("/:vehicleType", upload.single("image"), (req, res) => {
       if (err) {
         throw err;
       }
-      console.log('File is deleted');
+      console.log("File is deleted");
     }
   );
+
+  // reponding to client
   res.json({
-    company: req.body.company,
+    company: req.body.brandName,
     name: req.body.name,
     model: req.body.model,
     warrenty: req.body.warrenty,
     price: req.body.price,
     vehicleType: req.params.vehicleType,
-    number: req.body.number,
   });
 });
 
