@@ -17,12 +17,14 @@ const getBatteryRoute = require("./routes/batteryGet");
 const getBattriesRoute = require("./routes/batteriesGet");
 const postBatteryRoute = require("./routes/batteryPost");
 const updateBatteryRoute = require("./routes/batteryUpdate");
+const deleteBatteryRoute = require('./routes/batteryDelete');
 
 // using routes
 app.use("/detials", getBatteryRoute);
 app.use("/products", getBattriesRoute);
 app.use("/uploads", postBatteryRoute);
 app.use("/update", updateBatteryRoute);
+app.use('/delete', deleteBatteryRoute);
 
 //base url
 app.get("/", (req, res) => {
